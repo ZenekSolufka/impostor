@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Impostor Game</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #1a1a1a;
+        color: white;
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+      }
+      .card {
+        background: #2a2a2a;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+      input {
+        width: 80%;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 5px;
+        border: none;
+      }
+      button {
+        background: #3f51b5;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      button:hover {
+        background: #5c6bc0;
+      }
+      .hidden {
+        display: none;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      li {
+        background: #333;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      .word-box {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #ffeb3b;
+        margin: 20px 0;
+        padding: 20px;
+        border: 2px dashed #ffeb3b;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h1>🕵️ Impostor</h1>
+
+      <div id="setup-screen">
+        <input type="text" id="player-name" placeholder="Twoje imię" />
+        <input type="text" id="room-id" placeholder="Kod pokoju (np. 1234)" />
+        <br />
+        <button onclick="joinGame(false)">Dołącz do gry</button>
+        <button onclick="joinGame(true)" style="background: #4caf50">
+          Stwórz pokój (Host)
+        </button>
+      </div>
+
+      <div id="lobby-screen" class="hidden">
+        <h3>Pokój: <span id="display-room-id"></span></h3>
+        <p>Gracze w lobby:</p>
+        <ul id="player-list"></ul>
+        <button
+          id="start-btn"
+          class="hidden"
+          onclick="startGame()"
+          style="background: #f44336"
+        >
+          ROZPOCZNIJ GRĘ
+        </button>
+      </div>
+
+      <div id="game-screen" class="hidden">
+        <h3>Twoje tajne słowo:</h3>
+        <div id="word-display" class="word-box">???</div>
+        <p id="role-hint"></p>
+        <button onclick="location.reload()">Powrót do menu</button>
+      </div>
+    </div>
+
+    <script>
+      const SUPABASE_URL = "https://gdkvsgfxfelwkirfixfm.supabase.co";
+      const SUPABASE_KEY =
+        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdka3ZzZ2Z4ZmVsd2tpcmZpeGZtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzNTA2MTcsImV4cCI6MjA4OTkyNjYxN30.GQ12SdQaUeXBGs8cbDoXvE-5T-SYywARJjN5myQxvds";
+      const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+      let myId,
+        myRoom,
+        isHost = false,
+        myName;
+
+      async function joinGame(host) {
+        myName = document.getElementById("player-name").value;
+        myRoom = document.getElementById("room-id").value;
+        isHost = host;
+
+        if (!myName || !myRoom) return alert("Wpisz imię i kod pokoju!");
+
+        if (isHost) {
+          await supabaseClient
+            .from("rooms")
+            .upsert({ id: myRoom, status: "waiting" });
+        }
+
+        const { data } = await supabaseClient
+          .from("players")
+          .insert([{ name: myName, room_id: myRoom, is_host: isHost }])
+          .select();
+
+        myId = data[0].id;
+        showLobby();
+        setupRealtime();
+      }
+
+      function showLobby() {
+        document.getElementById("setup-screen").classList.add("hidden");
+        document.getElementById("lobby-screen").classList.remove("hidden");
+        document.getElementById("display-room-id").innerText = myRoom;
+        if (isHost)
+          document.getElementById("start-btn").classList.remove("hidden");
+      }
+
+      async function setupRealtime() {
+        // Słuchaj zmian u graczy
+        supabaseClient
+          .channel("players-res")
+          .on(
+            "postgres_changes",
+            { event: "*", schema: "public", table: "players" },
+            (payload) => {
+              fetchPlayers();
+            },
+          )
+          .subscribe();
+
+        // Słuchaj zmian w pokoju (czy gra wystartowała)
+        supabaseClient
+          .channel("room-res")
+          .on(
+            "postgres_changes",
+            { event: "UPDATE", schema: "public", table: "rooms" },
+            (payload) => {
+              if (payload.new.status === "playing") showWord(payload.new);
+            },
+          )
+          .subscribe();
+
+        fetchPlayers();
+      }
+
+      async function fetchPlayers() {
+        const { data } = await supabaseClient
+          .from("players")
+          .select("name")
+          .eq("room_id", myRoom);
+        const list = document.getElementById("player-list");
+        list.innerHTML = data.map((p) => `<li>${p.name}</li>`).join("");
+      }
+
+      // 1. Dodaj tę listę na początku skryptu
+      const dictionary = [
+        { spec: "Piłka Nożna", cat: "Sport" },
+        { spec: "Pizza Hawajska", cat: "Jedzenie" },
+        { spec: "Batman", cat: "Superbohater" },
+        { spec: "TikTok", cat: "Aplikacja" },
+        { spec: "Warszawa", cat: "Miasto" },
+        { spec: "Wiedźmin 3", cat: "Gra wideo" },
+      ];
+
+      // 2. Zaktualizowana funkcja startGame (używa supabaseClient)
+      async function startGame() {
+        const { data: players } = await supabaseClient
+          .from("players")
+          .select("id")
+          .eq("room_id", myRoom);
+
+        if (players.length < 3) {
+          return alert("Potrzebujecie co najmniej 3 graczy!");
+        }
+
+        const impostor = players[Math.floor(Math.random() * players.length)].id;
+        const set = dictionary[Math.floor(Math.random() * dictionary.length)];
+
+        await supabaseClient
+          .from("rooms")
+          .update({
+            status: "playing",
+            word_specific: set.spec,
+            word_category: set.cat,
+            impostor_id: impostor,
+          })
+          .eq("id", myRoom);
+      }
+
+      // 3. Pamiętaj, żeby w joinGame, setupRealtime i fetchPlayers
+      // też zmienić 'supabase' na 'supabaseClient'!
+
+      function showWord(roomData) {
+        document.getElementById("lobby-screen").classList.add("hidden");
+        document.getElementById("game-screen").classList.remove("hidden");
+
+        const display = document.getElementById("word-display");
+        const hint = document.getElementById("role-hint");
+
+        if (roomData.impostor_id === myId) {
+          display.innerText = roomData.word_category;
+          hint.innerText =
+            "Jesteś Impostorem! Twoje słowo to ogólna KATEGORIA.";
+          display.style.color = "#f44336";
+        } else {
+          display.innerText = roomData.word_specific;
+          hint.innerText = "Jesteś Cywilem. Masz konkretne słowo.";
+          display.style.color = "#4caf50";
+        }
+      }
+    </script>
+  </body>
+</html>
