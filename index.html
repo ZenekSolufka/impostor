@@ -179,65 +179,6 @@
         const list = document.getElementById("player-list");
         list.innerHTML = data.map((p) => `<li>${p.name}</li>`).join("");
       }
-
-      // 1. Dodaj tę listę na początku skryptu
-      const dictionary = [
-        // Kuchnia i Jedzenie
-    { spec: "Keczup", cat: "Pomidory" },
-    { spec: "Frytki", cat: "Ziemniaki" },
-    { spec: "Pizza Hawajska", cat: "Ananas" },
-    { spec: "Sushi", cat: "Surowa ryba" },
-    { spec: "Mleko", cat: "Krowa" },
-    { spec: "Pączek", cat: "Dziurka" },
-    { spec: "Kebab", cat: "Kula mocy" },
-
-    // Popkultura i Postacie
-    { spec: "Harry Potter", cat: "Blizna" },
-    { spec: "Sherlock Holmes", cat: "Lupa" },
-    { spec: "Batman", cat: "Nietoperz" },
-    { spec: "Shrek", cat: "Bagno" },
-    { spec: "Wiedźmin", cat: "Dwa miecze" },
-    { spec: "James Bond", cat: "Agent 007" },
-    { spec: "Myszka Miki", cat: "Uszy" },
-
-    // Przedmioty i Technologia
-    { spec: "iPhone", cat: "Jabłko" },
-    { spec: "Minecraft", cat: "Kwadraty" },
-    { spec: "TikTok", cat: "Krótkie filmy" },
-    { spec: "YouTube", cat: "Czerwony guzik" },
-    { spec: "Netflix", cat: "Serial" },
-    { spec: "Aparat", cat: "Soczewka" },
-    { spec: "Klawiatura", cat: "Przyciski" },
-
-    // Miejsca i Podróże
-    { spec: "Paryż", cat: "Wieża Eiffla" },
-    { spec: "Egipt", cat: "Piramidy" },
-    { spec: "Tatry", cat: "Giewont" },
-    { spec: "Rzym", cat: "Koloseum" },
-    { spec: "Las", cat: "Drzewa" },
-    { spec: "Pustynia", cat: "Piasek" },
-
-    // Życie codzienne
-    { spec: "Wigilia", cat: "Opłatek" },
-    { spec: "Wesele", cat: "Biała suknia" },
-    { spec: "Siłownia", cat: "Hantle" },
-    { spec: "Szpital", cat: "Karetka" },
-    { spec: "Szkoła", cat: "Dzwonek" },
-    { spec: "Kino", cat: "Popcorn" },
-    { spec: "Basen", cat: "Chlor" },
-
-    // Przyroda i Inne
-    { spec: "Pszczółka Maja", cat: "Miód" },
-    { spec: "Wampir", cat: "Czosnek" },
-    { spec: "Zima", cat: "Bałwan" },
-    { spec: "Księżyc", cat: "Noc" },
-    { spec: "Deszcz", cat: "Parasol" },
-    { spec: "Pies", cat: "Buda" },
-        Jasne! Skoro mechanika już śmiga, a Ty nie chcesz zmieniać nic w kodzie, przygotowałem potężną dostawę haseł w Twoim formacie { spec: "...", cat: "..." }.
-
-Dodałem 60 nowych zestawów, co razem z poprzednimi da Ci około 100 unikalnych rund. Podzieliłem je tematycznie, żeby łatwiej było Ci przeglądać listę:
-
-JavaScript
 const dictionary = [
    // --- LUDZIE I POSTACIE ---
     { spec: "Napoleon", cat: "Wyspa" },           // Wygnanie na Elbę/Świętą Helenę
@@ -433,12 +374,6 @@ const dictionary = [
     { spec: "Góry", cat: "Oscypek na zimno" },
     { spec: "Urząd", cat: "Pieczątka" },
     { spec: "Szpital", cat: "Biały kitel" },
-  Oto ostatnia, finałowa paczka 60 haseł. Tym razem postawiłem na absolutne "smaczki" – rzeczy, które każdy zna z autopsji, ale podpowiedzi są tak sformułowane, żeby Impostor musiał wykazać się instynktem przetrwania.
-
-Z tymi zestawami dobijasz do ponad 270 haseł, co przy 4 osobach i szybkich rundach wystarczy na kilkanaście grubych imprez bez ani jednej powtórki!
-
-JavaScript
-const dictionary = [
     // --- RELACJE I SOCJOLOGIA (SZYDERCZE) ---
     { spec: "Była dziewczyna", cat: "Blokada na Instagramie" },
     { spec: "Teściowa", cat: "Niedzielny obiad" },
