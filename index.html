@@ -182,12 +182,336 @@
 
       // 1. Dodaj tę listę na początku skryptu
       const dictionary = [
-        { spec: "Piłka Nożna", cat: "Sport" },
-        { spec: "Pizza Hawajska", cat: "Jedzenie" },
-        { spec: "Batman", cat: "Superbohater" },
-        { spec: "TikTok", cat: "Aplikacja" },
-        { spec: "Warszawa", cat: "Miasto" },
-        { spec: "Wiedźmin 3", cat: "Gra wideo" },
+        // Kuchnia i Jedzenie
+    { spec: "Keczup", cat: "Pomidory" },
+    { spec: "Frytki", cat: "Ziemniaki" },
+    { spec: "Pizza Hawajska", cat: "Ananas" },
+    { spec: "Sushi", cat: "Surowa ryba" },
+    { spec: "Mleko", cat: "Krowa" },
+    { spec: "Pączek", cat: "Dziurka" },
+    { spec: "Kebab", cat: "Kula mocy" },
+
+    // Popkultura i Postacie
+    { spec: "Harry Potter", cat: "Blizna" },
+    { spec: "Sherlock Holmes", cat: "Lupa" },
+    { spec: "Batman", cat: "Nietoperz" },
+    { spec: "Shrek", cat: "Bagno" },
+    { spec: "Wiedźmin", cat: "Dwa miecze" },
+    { spec: "James Bond", cat: "Agent 007" },
+    { spec: "Myszka Miki", cat: "Uszy" },
+
+    // Przedmioty i Technologia
+    { spec: "iPhone", cat: "Jabłko" },
+    { spec: "Minecraft", cat: "Kwadraty" },
+    { spec: "TikTok", cat: "Krótkie filmy" },
+    { spec: "YouTube", cat: "Czerwony guzik" },
+    { spec: "Netflix", cat: "Serial" },
+    { spec: "Aparat", cat: "Soczewka" },
+    { spec: "Klawiatura", cat: "Przyciski" },
+
+    // Miejsca i Podróże
+    { spec: "Paryż", cat: "Wieża Eiffla" },
+    { spec: "Egipt", cat: "Piramidy" },
+    { spec: "Tatry", cat: "Giewont" },
+    { spec: "Rzym", cat: "Koloseum" },
+    { spec: "Las", cat: "Drzewa" },
+    { spec: "Pustynia", cat: "Piasek" },
+
+    // Życie codzienne
+    { spec: "Wigilia", cat: "Opłatek" },
+    { spec: "Wesele", cat: "Biała suknia" },
+    { spec: "Siłownia", cat: "Hantle" },
+    { spec: "Szpital", cat: "Karetka" },
+    { spec: "Szkoła", cat: "Dzwonek" },
+    { spec: "Kino", cat: "Popcorn" },
+    { spec: "Basen", cat: "Chlor" },
+
+    // Przyroda i Inne
+    { spec: "Pszczółka Maja", cat: "Miód" },
+    { spec: "Wampir", cat: "Czosnek" },
+    { spec: "Zima", cat: "Bałwan" },
+    { spec: "Księżyc", cat: "Noc" },
+    { spec: "Deszcz", cat: "Parasol" },
+    { spec: "Pies", cat: "Buda" },
+        Jasne! Skoro mechanika już śmiga, a Ty nie chcesz zmieniać nic w kodzie, przygotowałem potężną dostawę haseł w Twoim formacie { spec: "...", cat: "..." }.
+
+Dodałem 60 nowych zestawów, co razem z poprzednimi da Ci około 100 unikalnych rund. Podzieliłem je tematycznie, żeby łatwiej było Ci przeglądać listę:
+
+JavaScript
+const dictionary = [
+   // --- LUDZIE I POSTACIE ---
+    { spec: "Napoleon", cat: "Wyspa" },           // Wygnanie na Elbę/Świętą Helenę
+    { spec: "Mikołaj Kopernik", cat: "Wstrzymanie" }, // "Wstrzymał Słońce..."
+    { spec: "Donald Trump", cat: "Mur" },
+    { spec: "Elon Musk", cat: "Mars" },
+    { spec: "Wiedźmin", cat: "Srebro" },          // Miecz na potwory
+    { spec: "James Bond", cat: "Wstrząśnięte" },  // "...nie zmieszane"
+    { spec: "Pinokio", cat: "Prawda" },           // Bo kłamał
+
+    // --- MIEJSCA I GEOGRAFIA ---
+    { spec: "Wenecja", cat: "Gołębie" },          // Plac św. Marka pełen ptaków
+    { spec: "Las Vegas", cat: "Grzech" },         // "Sin City"
+    { spec: "Paryż", cat: "Zapach" },             // Perfumy lub... specyficzny zapach metra
+    { spec: "Polska", cat: "Narzekanie" },        // Nasz sport narodowy
+    { spec: "IKEA", cat: "Labirynt" },
+    { spec: "Siłownia", cat: "Lustra" },          // Bo każdy się w nich przegląda
+    { spec: "Cmentarz", cat: "Cisza" },
+
+    // --- PRZEDMIOTY I ZJAWISKA ---
+    { spec: "Keczup", cat: "Frytki" },            // Niby proste, ale Impostor może pomyśleć o soli
+    { spec: "Pieniądze", cat: "Szczęście" },      // "Pieniądze szczęścia nie dają"
+    { spec: "Kawa", cat: "Budzik" },
+    { spec: "Telewizor", cat: "Pilot" },
+    { spec: "Internet", cat: "Kabel" },           // Albo Wi-Fi, podchwytliwe
+    { spec: "Papier toaletowy", cat: "Rolka" },
+    { spec: "Klucze", cat: "Brelok" },
+    { spec: "Lustro", cat: "Narcyz" },
+
+    // --- JEDZENIE (PODCHWYTLIWE) ---
+    { spec: "Pizza Hawajska", cat: "Kontrowersja" }, // Przez ten nieszczęsny ananas
+    { spec: "Cebula", cat: "Warstwy" },           // Jak ogry!
+    { spec: "Cytryna", cat: "Mina" },             // Odruch po zjedzeniu
+    { spec: "Kebab", cat: "Kac" },                // Klasyczne jedzenie "po imprezie"
+    { spec: "Mleko", cat: "Płatki" },
+    { spec: "Guma do żucia", cat: "Stół" },       // Bo tam często ląduje...
+
+    // --- ABSTRAKCJE I INNE ---
+    { spec: "Wigilia", cat: "Prezenty" },
+    { spec: "Wesele", cat: "Koperta" },
+    { spec: "Szkoła", cat: "Przerwa" },
+    { spec: "Facebook", cat: "Inwigilacja" },
+    { spec: "Instagram", cat: "Zazdrość" },       // Bo wszyscy pokazują idealne życie
+    { spec: "TikTok", cat: "Układ taneczny" },
+    { spec: "Biedronka", cat: "Paleta" },          // Bo wiecznie stoją w przejściach
+    { spec: "Zima", cat: "Sól" },                 // Sypanie dróg
+    { spec: "Deszcz", cat: "Kałuża" },
+    { spec: "Urlop", cat: "Paragon" },            // "Paragony grozy" nad morzem
+    { spec: "Prysznic", cat: "Śpiewanie" },
+  // --- LUDZIE I POPKULTURA (PODCHWYTLIWE) ---
+    { spec: "Robert Lewandowski", cat: "Bezglutenowe" }, // Dieta Anny Lewandowskiej
+    { spec: "Sanah", cat: "Szampan" },                 // Jej wielki hit
+    { spec: "Harry Potter", cat: "Okulary" },           // Niby proste, ale pasuje do wielu osób
+    { spec: "Sherlock Holmes", cat: "Skrzypce" },       // Grał na nich w wolnych chwilach
+    { spec: "Wiedźmin", cat: "Grosz" },                 // "Daj przysłowiowego..."
+    { spec: "Shrek", cat: "Cebula" },                   // Ma warstwy
+    { spec: "Batman", cat: "Rodzice" },                 // Mroczny żart (ich brak)
+    { spec: "Myszka Miki", cat: "Rękawiczki" },         // Charakterystyczny biały element
+    { spec: "Magda Gessler", cat: "Rzucanie talerzami" },
+    { spec: "Krzysztof Kononowicz", cat: "Szkolna 17" },
+
+    // --- JEDZENIE I NAPOJE (ABSTRAKCYJNE) ---
+    { spec: "Pizza Hawajska", cat: "Zbrodnia" },        // Dla wielu osób to profanacja
+    { spec: "Kebab", cat: "Sos łagodny" },              // "Kolego, mieszany?"
+    { spec: "Parówki", cat: "93% mięsa" },              // Czytanie składów
+    { spec: "Zupka chińska", cat: "Studia" },           // Klasyczny posiłek studenta
+    { spec: "Kawa", cat: "Sernik" },                    // "Kawa i serniczek" u cioci
+    { spec: "Herbata", cat: "Babcina szklanka" },       // W metalowym koszyczku
+    { spec: "Awokado", cat: "Kredyt hipoteczny" },      // Mem o tym, że milenialsi nie mają domów przez tosty z awokado
+    { spec: "Pączek", cat: "Tłusty czwartek" },
+    { spec: "Ogórek kiszony", cat: "Woda z ogórków" },
+
+    // --- ŻYCIE W POLSCE I MIEJSCA ---
+    { spec: "Biedronka", cat: "Paleta w przejściu" },
+    { spec: "Żabka", cat: "Hot-dog" },
+    { spec: "PKP", cat: "Opóźnienie" },
+    { spec: "NFZ", cat: "Kolejka do lekarza" },
+    { spec: "Poczta Polska", cat: "Awizo" },             // Choć byłeś w domu...
+    { spec: "IKEA", cat: "Hot-dog za 2 zł" },
+    { spec: "Basen", cat: "Czepek" },
+    { spec: "Siłownia", cat: "Poniedziałek" },           // Dzień klaty
+    { spec: "Kościół", cat: "Taca" },
+    { spec: "Wesele", cat: "Zenek" },                   // Król disco polo
+
+    // --- TECHNOLOGIA I INTERNET ---
+    { spec: "Facebook", cat: "Urodziny znajomych" },    // Jedyny powód, by tam zaglądać
+    { spec: "Instagram", cat: "Filtr" },
+    { spec: "Tinder", cat: "Przesunięcie w lewo" },
+    { spec: "YouTube", cat: "Pomiń reklamę" },
+    { spec: "Netflix", cat: "Dzielenie hasła" },
+    { spec: "iPhone", cat: "Brak ładowarki w pudełku" },
+    { spec: "Twitter (X)", cat: "Kłótnia" },
+    { spec: "Siri / Alexa", cat: "Podsłuchiwanie" },
+
+    // --- PRZEDMIOTY I ZJAWISKA ---
+    { spec: "Pieniądze", cat: "Inflacja" },
+    { spec: "Lustro", cat: "Siedem lat nieszczęścia" },
+    { spec: "Zegar", cat: "Szczęśliwi go nie liczą" },
+    { spec: "Deszcz", cat: "Anglia" },
+    { spec: "Słońce", cat: "Okulary" },
+    { spec: "Klucze", cat: "Dno torebki" },              // Miejsce, gdzie zawsze giną
+    { spec: "Pilot", cat: "Baterie" },
+    { spec: "Skarpetki", cat: "Sandały" },               // Atrybut turysty
+    { spec: "Pralka", cat: "Jedna z pary" },            // Gdzie ginie druga skarpetka?
+    { spec: "Klocki LEGO", cat: "Ból stopy" },           // Nadepnięcie na klocka
+
+    // --- MIEJSCA ---
+    { spec: "Warszawa", cat: "Słoiki" },
+    { spec: "Kraków", cat: "Smog" },
+    { spec: "Wrocław", cat: "Krasnale" },
+    { spec: "Gdańsk", cat: "Bursztyn" },
+    { spec: "Zakopane", cat: "Krupówki" },
+    { spec: "Radom", cat: "Chytra baba" },
+    { spec: "Sosnowiec", cat: "Paszport" },              // Klasyczny żart internetowy
+
+    // --- INNE ---
+    { spec: "Wigilia", cat: "Ryba w wannie" },           // Tradycja z karpiem
+    { spec: "Lany Poniedziałek", cat: "Wiaderko" },
+    { spec: "Urlop", cat: "Paragon grozy" },
+    { spec: "Kac", cat: "Nigdy więcej nie piję" },
+    { spec: "Matura", cat: "Garnitur" },
+    { spec: "Sesja", cat: "Kserówki" },
+  // --- POLSKA RZECZYWISTOŚĆ ---
+    { spec: "Paragon grozy", cat: "Ryba nad morzem" },
+    { spec: "Pasek w TVP", cat: "Propaganda" },
+    { spec: "Sąsiad", cat: "Wiertarka w sobotę" },
+    { spec: "Komunia", cat: "Zegarek lub rower" },
+    { spec: "Andrzej Duda", cat: "Narty" },
+    { spec: "Robert Makłowicz", cat: "Koperkowy pies" },
+    { spec: "Kraków", cat: "Smocza Jama" },
+    { spec: "Warszawa", cat: "Mordor na Domaniewskiej" },
+    { spec: "PKP", cat: "Wars" }, // Wagon restauracyjny
+    { spec: "ZUS", cat: "Emerytura widmo" },
+
+    // --- ŻYCIE CODZIENNE (HARD) ---
+    { spec: "Budzik", cat: "Drzemka" },
+    { spec: "Poniedziałek rano", cat: "Nienawiść" },
+    { spec: "Piątek wieczór", cat: "Wolność" },
+    { spec: "Wywiadówka", cat: "Strach przed rodzicami" },
+    { spec: "Pranie", cat: "Brakująca skarpetka" },
+    { spec: "Zmywarka", cat: "Tetris z naczyń" },
+    { spec: "Lodówka", cat: "Światło w środku" },
+    { spec: "Poduszka", cat: "Zimna strona" },
+    { spec: "Klucze", cat: "Są w drugiej kurtce" },
+    { spec: "Pilot do TV", cat: "Pod kanapą" },
+
+    // --- POPKULTURA I INTERNET ---
+    { spec: "YouTube Premium", cat: "Brak reklam" },
+    { spec: "AdBlock", cat: "Biała lista" },
+    { spec: "Wikipedia", cat: "Copy-paste do wypracowania" },
+    { spec: "Tinder", cat: "Ghosting" },
+    { spec: "Spotify", cat: "Wrapped" }, // Podsumowanie roku
+    { spec: "Netflix", cat: "Are you still watching?" },
+    { spec: "Cyberpunk 2077", cat: "Bug" },
+    { spec: "Counter-Strike", cat: "Rush B" },
+    { spec: "League of Legends", cat: "Toksyczność" },
+    { spec: "The Sims", cat: "Zabranie drabinki z basenu" },
+
+    // --- JEDZENIE (MOCNO NIEOCZYWISTE) ---
+    { spec: "Rosół", cat: "Niedziela u babci" },
+    { spec: "Sałatka jarzynowa", cat: "Majonez kielecki" }, // Odwieczna wojna z dekoracyjnym
+    { spec: "Pączek", cat: "Lukier na palcach" },
+    { spec: "Kawa", cat: "Rozpuszczalna" },
+    { spec: "Energetyk", cat: "Serce wali" },
+    { spec: "Pierogi", cat: "Lepienie" },
+    { spec: "Bigos", cat: "Odgrzewany kilka razy" },
+    { spec: "Parówki", cat: "Woda po gotowaniu" },
+    { spec: "Chipsy", cat: "Powietrze w paczce" },
+
+    // --- POSTACIE I STEREOTYPY ---
+    { spec: "Karyna", cat: "Paznokcie hybrydowe" },
+    { spec: "Typowy Janusz", cat: "Grill i piwko" },
+    { spec: "Student", cat: "Zniżka 51%" },
+    { spec: "Programista", cat: "Praca zdalna" },
+    { spec: "Influencer", cat: "Kod rabatowy" },
+    { spec: "Lekarz", cat: "Pismo nie do odczytania" },
+    { spec: "Kierowca BMW", cat: "Brak kierunkowskazu" },
+
+    // --- PRZEDMIOTY I MARKI ---
+    { spec: "Klocki LEGO", cat: "Instrukcja obsługi" },
+    { spec: "IKEA", cat: "Klucz imbusowy" },
+    { spec: "Nokia 3310", cat: "Niezniszczalna" },
+    { spec: "Crocsy", cat: "Tryb sportowy" }, // Pasek do tyłu
+    { spec: "iPhone", cat: "Zbita szybka" },
+    { spec: "Termomiks", cat: "Sekta" }, // Bo każdy kto ma, ciągle o nim mówi
+
+    // --- MIEJSCA ---
+    { spec: "Siłownia", cat: "Białko" },
+    { spec: "Kino", cat: "Szepty za plecami" },
+    { spec: "Lotnisko", cat: "Cło" },
+    { spec: "Las", cat: "Kleszcz" },
+    { spec: "Plaża", cat: "Parawan" },
+    { spec: "Góry", cat: "Oscypek na zimno" },
+    { spec: "Urząd", cat: "Pieczątka" },
+    { spec: "Szpital", cat: "Biały kitel" },
+  Oto ostatnia, finałowa paczka 60 haseł. Tym razem postawiłem na absolutne "smaczki" – rzeczy, które każdy zna z autopsji, ale podpowiedzi są tak sformułowane, żeby Impostor musiał wykazać się instynktem przetrwania.
+
+Z tymi zestawami dobijasz do ponad 270 haseł, co przy 4 osobach i szybkich rundach wystarczy na kilkanaście grubych imprez bez ani jednej powtórki!
+
+JavaScript
+const dictionary = [
+    // --- RELACJE I SOCJOLOGIA (SZYDERCZE) ---
+    { spec: "Była dziewczyna", cat: "Blokada na Instagramie" },
+    { spec: "Teściowa", cat: "Niedzielny obiad" },
+    { spec: "Kurier", cat: "Będę za 5 minut" }, // Klasyczne kłamstwo
+    { spec: "Sąsiad", cat: "Remont u góry" },
+    { spec: "Współlokator", cat: "Brudne naczynia" },
+    { spec: "Młodsze rodzeństwo", cat: "Skarżenie rodzicom" },
+    { spec: "Szef", cat: "ASAP" }, // As Soon As Possible
+    { spec: "Dyrektor", cat: "Apel na korytarzu" },
+
+    // --- DOM I CODZIENNOŚĆ (BARDZO ŻYCIOWE) ---
+    { spec: "Pilot do TV", cat: "Uderzanie w spód" }, // Żeby zadziałały baterie
+    { spec: "Router Wi-Fi", cat: "Odłącz i podłącz" },
+    { spec: "Odkurzacz", cat: "Wciągnięta firanka" },
+    { spec: "Pralka", cat: "Pożarta skarpetka" },
+    { spec: "Lodówka", cat: "Przeterminowany jogurt" },
+    { spec: "Szafa", cat: "Nie mam się w co ubrać" },
+    { spec: "Lustro", cat: "Gadanie do siebie" },
+    { spec: "Kosz na śmieci", cat: "Zawsze pełny" },
+    { spec: "Patelnia", cat: "Przywieranie" },
+    { spec: "Czajnik", cat: "Kamień na dnie" },
+
+    // --- POLSKIE KLASYKI (KULTOWE) ---
+    { spec: "Orlen", cat: "Hot-dog i kawa" },
+    { spec: "Biedronka", cat: "Świeżaki" },
+    { spec: "Lidl", cat: "Sobota" }, // "Jak sobota to tylko do..."
+    { spec: "Allegro", cat: "Paczkomat" },
+    { spec: "Blik", cat: "Kod 6 cyfr" },
+    { spec: "InPost", cat: "Multiskrytka" },
+    { spec: "Krupówki", cat: "Biały miś" },
+    { spec: "Bałtyk", cat: "Sinice" },
+    { spec: "Mazury", cat: "Komary" },
+    { spec: "Polsat", cat: "Kevin sam w domu" },
+
+    // --- TECHNOLOGIA I INTERNET (WSPÓŁCZESNE) ---
+    { spec: "ChatGPT", cat: "Halucynacje" }, // Gdy AI zmyśla fakty
+    { spec: "Discord", cat: "Powiadomienie @everyone" },
+    { spec: "Twitch", cat: "Donejt" },
+    { spec: "OnlyFans", cat: "Subskrypcja" },
+    { spec: "Kryptowaluty", cat: "Koparka" },
+    { spec: "Steam", cat: "Promocja -90%" },
+    { spec: "Excel", cat: "Formuły" },
+    { spec: "PowerPoint", cat: "Przejście slajdu" },
+
+    // --- SYTUACJE (HARDCORE) ---
+    { spec: "Kac", cat: "Klin" },
+    { spec: "Randka", cat: "Niezręczna cisza" },
+    { spec: "Egzamin", cat: "Ściąga w rękawie" },
+    { spec: "Siłownia", cat: "Zdjęcie w lustrze" },
+    { spec: "Praca zdalna", cat: "Kamerka wyłączona" },
+    { spec: "Zakupy", cat: "Zapomniana reklamówka" },
+    { spec: "Fryzjer", cat: "Tak, jest super (wcale nie)" },
+    { spec: "Dentysta", cat: "Borowanie" },
+
+    // --- PRZEDMIOTY (PODCHWYTLIWE) ---
+    { spec: "Skarpetki", cat: "Dziura na palcu" },
+    { spec: "Sandały", cat: "Skórzane paski" },
+    { spec: "Parasol", cat: "Złamany drut" },
+    { spec: "Portfel", cat: "Zdjęcie bliskich" },
+    { spec: "Paszport", cat: "Brzydkie zdjęcie" },
+    { spec: "Dowód osobisty", cat: "18 lat" },
+    { spec: "Karta miejska", cat: "Kontrola biletów" },
+    { spec: "Piórnik", cat: "Ściągi" },
+
+    // --- JEDZENIE (FINAŁOWE) ---
+    { spec: "Majonez Kielecki", cat: "Ocet" },
+    { spec: "Sałatka jarzynowa", cat: "Krojenie w kostkę" },
+    { spec: "Pączek", cat: "Nadzienie różane" },
+    { spec: "Kebab", cat: "Na cienkim" },
+    { spec: "Ziemniaki", cat: "Zostaw, zjedz chociaż mięso" }, // Klasyk u mamy
+    { spec: "Kanapka", cat: "Spadanie masłem do dołu" },
+    { spec: "Lody", cat: "Zimny pot" },
+    { spec: "Guma do żucia", cat: "Poczęstujesz?" }
       ];
 
       // 2. Zaktualizowana funkcja startGame (używa supabaseClient)
