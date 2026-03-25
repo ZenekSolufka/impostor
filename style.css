@@ -55,3 +55,12 @@ li {
   padding: 20px;
   border: 2px dashed #ffeb3b;
 }
+
+.start-btn {
+  background: #f44336;
+}
+
+.next-round-btn {
+  background: #4caf50;
+  margin-bottom: 10px;
+}
